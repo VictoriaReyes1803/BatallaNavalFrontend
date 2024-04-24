@@ -27,9 +27,9 @@ export class WebSocketService {
       broadcaster: 'pusher',
       key: environment.pusher.key,
       cluster: environment.pusher.cluster,
-      encrypted: true, 
+      encrypted: true,
       disableStats: true,
-      logToConsole: true, 
+      logToConsole: true,
     });
   }
 
@@ -44,18 +44,19 @@ export class WebSocketService {
     this.echo?.leave(channel);
   }
 
-  public testevent(callback: (e: any) => void) {
-    this.echo?.channel('testchann').listen('.testevent', (data: any) => {
-      callback(data);
-    });
-  }
-
-  public creategame(callback: (e: any) => void) {
-    this.echo?.channel('game').listen('.creategame', (data: any) => {
+  public startgame(callback: (e: any) => void) {
+    this.echo?.channel('startgame').listen('.startgame', (data: any) => {
       callback(data);
     });
   }
 
 
-  
+  public attackEvent(callback: (e: any) => void) {
+    this.echo?.channel('atacar').listen('.atacar', (e: any) => {
+      callback(e);
+    });
+  }
+
+
+
 }
