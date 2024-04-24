@@ -44,6 +44,12 @@ export class WebSocketService {
     this.echo?.leave(channel);
   }
 
+  public testevent(callback: (e: any) => void) {
+    this.echo?.channel('testchann').listen('.testevent', (data: any) => {
+      callback(data);
+    });
+  }
+
   public creategame(callback: (e: any) => void) {
     this.echo?.channel('game').listen('.creategame', (data: any) => {
       callback(data);
