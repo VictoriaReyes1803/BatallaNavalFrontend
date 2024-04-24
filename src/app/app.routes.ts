@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
+import { AuthComponent } from './Layouts/auth/auth.component';
+import { LoginComponent } from './Views/Auth/login/login.component';
 
 export const routes: Routes = [
-
     {
         path: '',
-        component: AppComponent,
-        children: [
+        component: AuthComponent,
+        children:[
             {
-                path: ''
-
+                path: '',
+                component: LoginComponent
             }
         ]
     }
