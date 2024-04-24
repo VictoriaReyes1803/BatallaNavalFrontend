@@ -5,6 +5,7 @@ import { RegisterComponent } from './Views/Auth/register/register.component';
 import { CodeComponent } from './Views/Auth/code/code.component';
 import { MenuComponent } from './Layouts/menu/menu.component';
 import { HomeComponent } from './Views/principal/home/home.component';
+import { HistorialComponent } from './Views/principal/historial/historial.component';
 
 export const routes: Routes = [
     {
@@ -32,6 +33,10 @@ export const routes: Routes = [
             {
                 path: '',
                 component: HomeComponent
+            },
+            {
+                path: 'historial',
+                component: HistorialComponent
             }
         ]
     }
