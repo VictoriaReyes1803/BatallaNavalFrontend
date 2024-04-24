@@ -1,1 +1,42 @@
-<p>code works!</p>
+<main class="h-screen w-full">
+    <div class="flex justify-center items-center h-full w-full">
+        <style>
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: 'Inter', sans-serif;
+                --font-sans: 'Inter';
+            }
+        </style>
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                --font-sans: 'Inter';
+            }
+        </style>
+        <div class="flex flex-col items-center justify-center h-screen">
+            <div class="max-w-md w-full space-y-4 p-6 bg-white rounded-lg shadow-md">
+                <div class="space-y-2">
+                    <h1 class="text-2xl font-bold">Verify Code</h1>
+                    <p class="text-gray dark:text-gray-400">Enter the code you received and click the button to
+                        verify.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <input
+                            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-1"
+                            placeholder="Enter code" maxlength="6" pattern="^[0-9]{6}$" type="text" />
+                        <button
+                            class="text-white bg-black inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+                            Verify
+                        </button>
+                    </div>
+                    <div class="hidden text-green-500 dark:text-green-400 font-medium">Code verified succe</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
