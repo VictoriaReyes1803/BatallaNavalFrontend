@@ -16,7 +16,7 @@ export class DesauthGuard implements CanActivate {
         map(e => {
           const isAuthenticated = !!e;
           if (isAuthenticated){
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/home']);
           }
           return !isAuthenticated;
         }
