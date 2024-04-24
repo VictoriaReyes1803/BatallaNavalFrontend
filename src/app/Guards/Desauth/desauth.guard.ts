@@ -6,7 +6,7 @@ import { Observable, map, catchError, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class DesauthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -15,16 +15,13 @@ export class AuthGuard implements CanActivate {
       return this.authService.isAuthenticated().pipe(
         map(e => {
           const isAuthenticated = !!e;
-          if (!isAuthenticated){
-            this.authService.resetAll()
-            this.router.navigate(['/']);
+          if (isAuthenticated){
+            this.router.navigate(['/home']);
           }
-          return isAuthenticated;
+          return !isAuthenticated;
         }
         ),
         catchError(() => {
-          this.authService.resetAll()
-          this.router.navigate(['/']);
           return of(false);
         })
       );
