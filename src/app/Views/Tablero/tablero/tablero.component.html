@@ -1,1 +1,55 @@
-<p>tablero works!</p>
+<!-- Para la matriz 'enemyBoard' -->
+<section class="board grid h-screen" style="grid-template-rows: 5fr 1fr;">
+  <div class="boards grid grid-cols-2">
+    <div class="flex flex-col items-center justify-center my-8">
+      <div class="cont h-full w-10/12">
+        <div class="title flex justify-center items-center ">
+          <h3 class="text-2xl font-bold mb-4">Tablero Rival</h3>
+        </div>
+        <div class="tablero flex justify-center items-center  h-full">
+          <table class="table-fixed border-collapse">
+            <tr *ngFor="let row of tabla2; let i = index">
+              <td *ngFor="let cell of row; let j = index" class="p-0">
+                <button
+                  id="button"
+                  [disabled]="turno != this.authService.getUserId() || juegoFinalizado"
+                  [ngClass]="{'water': cell == 'w', 'ship': cell == 's', 'hited': cell == 'h', 'missed': cell == 'm'}"
+                  class="w-full h-full hover:bg-blue-700 text-white font-bold py-2 px-4 border border-gray-300 rounded"
+                  (click)="atacar(i, j)">{{cell}}</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Para la matriz 'board' -->
+    <div class="flex flex-col items-center justify-center my-8">
+      <div class="cont h-full w-10/12">
+        <div class="title flex justify-between">
+          <h3 [ngClass]="{'bg-red-400': turno != authService.getUserId(), 'bg-green-400': turno == authService.getUserId()}" class="text-2xl font-bold mb-4">{{ turno != authService.getUserId() ? 'Turno del rival' :
+            'Tu turno' }}</h3>
+          <h3 class="text-xl mb-2">Mi Tablero</h3>
+        </div>
+        <div class="tablero flex justify-center items-center  h-full">
+          <table class="table-fixed border-collapse">
+            <tr *ngFor="let row of tabla; let i = index">
+              <td *ngFor="let cell of row; let j = index" class="p-0">
+                <button
+                  [disabled]="true"
+                  [ngClass]="{'water': cell == 'w', 'ship': cell == 's', 'hited': cell == 'h', 'missed': cell == 'm'}"
+                  class="w-full h-full text-white font-bold py-2 px-4 border border-gray-300 rounded"></button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Boton para abandonar la partida -->
+  <div class="flex justify-center my-8">
+    <button [ngClass]="{'bg-gray-100': turno != this.authService.getUserId(), 'bg-red-500': turno == this.authService.getUserId()}" [disabled]="turno != authService.getUserId()" class="hover:bg-red-700 text-black font-bold py-2 px-4 border border-gray-300 rounded"
+            (click)="salir()">Abandonar Partida</button>
+  </div>
+
+</section>
