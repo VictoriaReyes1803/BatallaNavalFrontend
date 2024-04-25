@@ -13,14 +13,8 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor(private WebSocketService: WebSocketService){}
+  constructor(){}
 
   ngOnInit(){
-    setTimeout(() => {
-      this.WebSocketService.testevent((data)=>{
-        console.log(data)
-      })
-    }, 1500);
-   
   }
 }

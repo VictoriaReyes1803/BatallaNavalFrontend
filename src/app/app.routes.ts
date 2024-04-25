@@ -8,6 +8,7 @@ import { HomeComponent } from './Views/principal/home/home.component';
 import { HistorialComponent } from './Views/principal/historial/historial.component';
 import { DesauthGuard } from './Guards/Desauth/desauth.guard';
 import { AuthGuard } from './Guards/Auth/auth.guard';
+import { TableroComponent } from './Views/juego/tablero/tablero.component';
 
 export const routes: Routes = [
     {
@@ -32,7 +33,7 @@ export const routes: Routes = [
     {
         path: 'home',
         component: MenuComponent,
-        canActivate: [AuthGuard],
+//        canActivate: [AuthGuard],
         children: [
             {
                 path: '',
@@ -41,6 +42,10 @@ export const routes: Routes = [
             {
                 path: 'historial',
                 component: HistorialComponent
+            },
+            {
+                path: 'tablero',
+                component: TableroComponent
             }
         ]
     }

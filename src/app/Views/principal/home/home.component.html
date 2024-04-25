@@ -1,39 +1,14 @@
-<main class="h-screen w-full">
-    <div class="flex justify-center items-center h-full w-full">
-        <style>
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                font-family: 'Inter', sans-serif;
-                --font-sans: 'Inter';
-            }
-        </style>
-        <style>
-            body {
-                font-family: 'Inter', sans-serif;
-                --font-sans: 'Inter';
-            }
-        </style>
-        <div class="flex flex-col items-center justify-center h-screen bg-white text-gray-900">
-            <div class="bg-gray-100 rounded-lg p-8 shadow-lg w-full max-w-md">
-                <h1 class="text-3xl font-bold mb-6">Menu de juego</h1>
-                <nav class="space-y-4">
-                    <a class="block bg-gray-300 hover:bg-gray-400 transition-colors duration-300 rounded-lg py-3 px-6">
-                        Empezar Juego
-                    </a>
-                    <a class="block bg-gray-300 hover:bg-gray-400 transition-colors duration-300 rounded-lg py-3 px-6">
-                        Crear juego
-                    </a>
-                    <a class="block bg-gray-300 hover:bg-gray-400 transition-colors duration-300 rounded-lg py-3 px-6">
-                        Historial
-                    </a>
-                    <a class="block bg-red-500 hover:bg-red-600 transition-colors duration-300 rounded-lg py-3 px-6 text-white">
-                        Cerrar sesion
-                    </a>
-                </nav>
+<main>
+    <app-background/>
+    <div class="cont h-screen w-full flex justify-center items-center">
+        <div class="grid gap-10" style="grid-template-rows: 1fr 3fr;">
+            <div class="title flex justify-center items-center">
+                    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl ">Batalla <span class="text-white">naval</span> juego</h1>
+            </div>
+            <div class="options gap-10 flex ">
+                <app-simple-button message="Crear una partidad nueva"/>
+                <app-simple-button message="Buscar una partida"/>
+                <app-simple-button message="Cerrar sesion"/>
             </div>
         </div>
     </div>
