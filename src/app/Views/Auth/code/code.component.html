@@ -1,42 +1,156 @@
-<main class="h-screen w-full">
-    <div class="flex justify-center items-center h-full w-full">
-        <style>
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                font-family: 'Inter', sans-serif;
-                --font-sans: 'Inter';
-            }
-        </style>
-        <style>
-            body {
-                font-family: 'Inter', sans-serif;
-                --font-sans: 'Inter';
-            }
-        </style>
-        <div class="flex flex-col items-center justify-center h-screen">
-            <div class="max-w-md w-full space-y-4 p-6 bg-white rounded-lg shadow-md">
-                <div class="space-y-2">
-                    <h1 class="text-2xl font-bold">Verify Code</h1>
-                    <p class="text-gray dark:text-gray-400">Enter the code you received and click the button to
-                        verify.</p>
-                </div>
-                <div class="space-y-4">
-                    <div class="flex items-center space-x-2">
-                        <input
-                            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-1"
-                            placeholder="Enter code" maxlength="6" pattern="^[0-9]{6}$" type="text" />
-                        <button
-                            class="text-white bg-black inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-                            Verify
-                        </button>
-                    </div>
-                    <div class="hidden text-green-500 dark:text-green-400 font-medium">Code verified succe</div>
-                </div>
-            </div>
+<div *ngIf="mostrarAlerta" class="alert">
+    <app-alert [message]="message"></app-alert>
+  </div>
+  <app-global-loader
+  *ngIf="loadingVerify" class="loadr"
+  />  
+  
+  <div class="fondoAnimado flex flex-col justify-center items-center w-full h-screen">
+    <div class=" primerc img"></div>
+    <div class=" primerc bg-white rounded-lg border bg-card vff">
+      <div class="flex flex-col space-y-1.5 p-6">
+
+        <div class="text-black">Verify your code</div>
+        <div class="text-black">
+          Insert the 6-digit code sent to your email
         </div>
+      </div>
+      <div class="p-6 flex justify-center gap-4">
+        <div class="flex justify-center items-center gap-x-6 ">
+    
+          <div class="flex flex-col items-center gap-2">
+            <input 
+            *ngIf="!success"
+            type="text" #code1 [@shake]="hasError" [ngClass]="{successInput: success}"
+              class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="-" maxlength="1" [(ngModel)]="code.code1" (ngModelChange)="cambiarFoco(1)" />
+    
+            <div 
+            *ngIf="success"
+            class="flex justify-center items-center -top-2 -right-2 text-success-foreground w-10 h-10 bg-white rounded-full shadow-md p-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                viewBox="0 0 16 16">
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+              </svg>
+            </div>
+          </div>
+    
+          <div class="flex flex-col items-center gap-2">
+            <input 
+            *ngIf="!success"
+            type="text" #code2 [@shake]="hasError" [ngClass]="{successInput: success}"
+              class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="-" maxlength="1" [(ngModel)]="code.code2" (ngModelChange)="cambiarFoco(2)" />
+    
+            <div 
+            *ngIf="success"
+            class="flex justify-center items-center -top-2 -right-2 text-success-foreground w-10 h-10 bg-white rounded-full shadow-md p-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                viewBox="0 0 16 16">
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+              </svg>
+            </div>
+          </div>
+    
+          <div class="flex flex-col items-center gap-2">
+            <input 
+            *ngIf="!success"
+            type="text" #code3 [@shake]="hasError" [ngClass]="{successInput: success}"
+              class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="-" maxlength="1" [(ngModel)]="code.code3" (ngModelChange)="cambiarFoco(3)" />
+    
+            <div 
+            *ngIf="success"
+            class="flex justify-center items-center -top-2 -right-2 text-success-foreground w-10 h-10 bg-white rounded-full shadow-md p-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                viewBox="0 0 16 16">
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+              </svg>
+            </div>
+          </div>
+    
+          <div class="flex flex-col items-center gap-2">
+            <input 
+            *ngIf="!success"
+            type="text" #code4 [@shake]="hasError" [ngClass]="{successInput: success}"
+              class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="-" maxlength="1" [(ngModel)]="code.code4" (ngModelChange)="cambiarFoco(4)" />
+    
+            <div 
+            *ngIf="success"
+            class="flex justify-center items-center -top-2 -right-2 text-success-foreground w-10 h-10 bg-white rounded-full shadow-md p-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                viewBox="0 0 16 16">
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+              </svg>
+            </div>
+          </div>
+    
+          <div class="flex flex-col items-center gap-2">
+            <input 
+            *ngIf="!success"
+            type="text" #code5 [@shake]="hasError" [ngClass]="{successInput: success}"
+              class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="-" maxlength="1" [(ngModel)]="code.code5" (ngModelChange)="cambiarFoco(5)" />
+    
+            <div 
+            *ngIf="success"
+            class="flex justify-center items-center -top-2 -right-2 text-success-foreground w-10 h-10 bg-white rounded-full shadow-md p-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                viewBox="0 0 16 16">
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+              </svg>
+            </div>
+          </div>
+    
+          <div class="flex flex-col items-center gap-2">
+            <input 
+            *ngIf="!success"
+            type="text" #code6 [@shake]="hasError" [ngClass]="{successInput: success}"
+              class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+              placeholder="-" maxlength="1" [(ngModel)]="code.code6" (ngModelChange)="cambiarFoco(6)" />
+    
+            <div 
+            *ngIf="success"
+            class="flex justify-center items-center -top-2 -right-2 text-success-foreground w-10 h-10 bg-white rounded-full shadow-md p-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                viewBox="0 0 16 16">
+                <path
+                  d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+              </svg>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="items-center p-6 flex justify-end">
+        
+        <button 
+        (click)="resendEmail()"
+        [disabled]="loadingResend"
+          class=" text-white bg-slate-950 border inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors  disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-md px-3">
+          <p
+          *ngIf="!loadingResend"
+          >Resend code</p>
+          <app-global-loader
+          *ngIf="loadingResend"
+          />  
+        </button>
+        
+  
+          
+        <button 
+        (click)="verifyCode()"
+        [disabled]="!code.code1 || !code.code2 || !code.code3 || !code.code4 || !code.code5 || !code.code6 || disabledSumbitButton || loadingVerify"
+          class="text-white bg-slate-950 border inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors  disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-md px-3">
+          <p>Submit</p>
+         
+        </button>
+      </div>
     </div>
-</main>
+  </div>

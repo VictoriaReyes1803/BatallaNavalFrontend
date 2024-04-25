@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <main class="w-full h-screen">
     <div class="flex h-screen w-full justify-center items-center">
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm px-0" data-v0-t="card">
@@ -9,46 +10,107 @@
                                 <h3 class="whitespace-nowrap tracking-tight text-2xl font-bold">Login</h3>
                                 <p class="text-sm text-muted-foreground">Enter your email below to login to your account
                                 </p>
+=======
+<app-global-loader class="zindx" *ngIf="isSubmitting"></app-global-loader>
+<app-code-verify *ngIf="verifycode" [email]="email" [password]="password" (onCancel)="cancel()" ></app-code-verify>
+<div *ngIf="mostrarAlerta" class="alertmsg">
+    <app-alert [message]="message"></app-alert>
+</div>
+<div *ngIf="!verifycode" class="fondoAnimado text-gray-900 justify-center">
+
+
+  <div class=" primerc max-w-screen-xl m-0 sm:m-10 sm:rounded-lg flex justify-center flex-1" style="background-color: #ffffff00;">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+        <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
+            <section class="logo-cont flex justify-center items-center ">
+                <div class="logo h-full w-full"></div>
+            </section>
+            <div class="mt-5 flex flex-col items-center justify-center">
+                <div class="w-full flex-1 mt-8">
+                    <form class="mx-auto max-w-xs" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="textInputWrapper">
+                            <input
+                            name="email"
+                            formControlName="email"
+                            placeholder="Email" type="text" class="textInput">
+                          <div class="alert"
+                               *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">
+                            <div
+                              *ngIf="loginForm.controls['email'].errors?.['required']">El email es requerido.
+>>>>>>> a2088cd5c3933008e1fbced5cd1bba9f176831a0
                             </div>
-                            <div class="p-6">
-                                <div class="space-y-4">
-                                    <div class="space-y-2">
-                                        <label
-                                            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                            for="email">
-                                            Email
-                                        </label>
-                                        <input
-                                            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                            id="email" placeholder="m@example.com" required="" type="email" />
-                                    </div>
-                                    <div class="space-y-2">
-                                        <div class="flex items-center">
-                                            <label
-                                                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                                for="password">
-                                                Password
-                                            </label>
-                                        </div>
-                                        <input
-                                            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                            id="password" required="" type="password" placeholder="********"/>
-                                    </div>
-                                </div>
+                            <div
+                              *ngIf="loginForm.controls['email'].errors?.['email']">
+                              Formato de email incorrecto.
                             </div>
-                            <div class="flex flex-col items-center p-4 space-y-2">
-                                <button
-                                    class="bg-black text-white inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full">
-                                    Login
-                                </button>
-                                <label class="w-full">
-                                    <a [routerLink]="['/register']" class="text-sm text-accent">Registarse aqui</a>
-                                </label>
-                            </div>
+                          </div>
                         </div>
-                    </div>
+
+                        <div class="textInputWrapper">
+                            <input
+                            name="password"
+                            formControlName="password"
+                            placeholder="Password" type="password" class="textInput">
+                          <div class="alert"
+                               *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+                            <div
+                              *ngIf="loginForm.controls['password'].errors?.['required']">La contraseña es requerida.
+                            </div>
+                          </div>
+                        </div>
+
+                        <button [disabled]="!loginForm.valid || isSubmitting"
+                            type="submit"
+                            class="mt-5 tracking-wide bg-white font-semibold text-black-500 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" style="background-color: #a3e583;">
+                            <svg class="w-6 h-6 -ml-2" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="8.5" cy="7" r="4" />
+                                <path d="M20 8v6M23 11h-6" />
+                            </svg>
+                            <span class="ml-">
+                                Sign In
+                            </span>
+                        </button>
+
+
+                      <div class="alert" *ngIf="backendErrorMessage">
+                        <div class="text-red-500">
+                          {{ backendErrorMessage }}
+                        </div>
+                      </div>
+
+                      <div class="text-red-500" *ngIf="notfound">
+                        User Not Found.
+                      </div>
+
+                      <div class="text-red-500" *ngIf="passwordVerify" >
+                        Incorrect password.
+                      </div>
+
+                      <div class="text-red-500" *ngIf="error">
+                        Server error.
+                      </div>
+
+                      <div class="alert" *ngIf="backendErrors">
+                        <div class="text-red-500" *ngFor="let error of backendErrors | keyvalue">
+                          {{ error.value }}
+                        </div>
+                      </div>
+
+                      <p class="mt-6 text-xs text-white text-center">
+                        Don't have an account?
+                        <a
+                        (click)="register()"
+                        class="hover:underline cursor-pointer text-green-500">Sign up</a>
+                        <br>
+                    
+                    </p>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>
