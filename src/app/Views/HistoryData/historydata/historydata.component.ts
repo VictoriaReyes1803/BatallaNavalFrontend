@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class HistoryDataComponent {
 
     constructor(private router: Router){    }
-
+    nohay = false
     public historyService = inject(JuegourlsService)
 
     public games = signal<Game[]>([]);
@@ -28,6 +28,7 @@ export class HistoryDataComponent {
     }
 
     loadPage(page: number){
+      this.nohay = false
       this.historyService.getHistory(page)
         .pipe(
           filter(games => games.games.length > 0)
@@ -35,7 +36,10 @@ export class HistoryDataComponent {
         .subscribe(games => {
           this.games.set(games.games);
           this.currentPage.set(page);
+          
         })
+
+
     }
 
   closeModal() {
