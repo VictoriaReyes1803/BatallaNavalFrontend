@@ -8,6 +8,7 @@ import { HomeComponent } from './Views/principal/home/home.component';
 import { HistorialComponent } from './Views/principal/historial/historial.component';
 import { DesauthGuard } from './Guards/Desauth/desauth.guard';
 import { AuthGuard } from './Guards/Auth/auth.guard';
+import { MenuGame } from './Views/MenuGame/menugame/menugame.component';
 
 export const routes: Routes = [
     {
@@ -41,6 +42,9 @@ export const routes: Routes = [
             {
                 path: 'historial',
                 component: HistorialComponent
+            }, {
+                path: 'Game',
+                component: MenuGame
             }
         ]
     }

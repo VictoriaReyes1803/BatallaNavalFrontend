@@ -40,6 +40,8 @@ export class WebSocketService {
     });
   }
 
+  
+
   public leaveChannel(channel: string): void {
     this.echo?.leave(channel);
   }

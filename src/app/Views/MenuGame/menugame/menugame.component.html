@@ -1,42 +1,55 @@
-<app-global-loader text="Looking for Player..." [textng]="true" (close)="closeCreateGame()" btntext="Cancel" [btnng]="true" [disabled]="disab" *ngIf="isSubmitting" />
-<app-global-loader text="Looking for Game..." [textng]="true" (close)="closeSearchGame()" btntext="Cancel" [btnng]="true"  *ngIf="isSubmitting2" />
-<app-global-loader *ngIf="isSubmitting3" />
 
-
-<div class=" fondoAnimado text-gray-900 flex justify-center">
-    
-    <div class=" primerc max-w-screen-xl m-0 sm:m-10 sm:rounded-lg flex justify-center flex-1" style="background-color: #00000000;">
-
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        
-        <div class="ksl lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-            
-            <section class="logo-cont flex justify-center items-center ">
-                <div class="logo h-full w-full"></div>
-            </section>
-
-            <h1 class="name">{{userName}}</h1>
-
-            <button (click)="creategame()"class="button">
-                <span class="liquid"></span>  
-                <span class="btn-txt">Create Game</span>
+    <app-global-loader text="Buscando un jugador..." [textng]="true"  btntext="Cancel" [btnng]="true"  *ngIf="load1" />
+    <app-global-loader text="Buscando un juego..." [textng]="true"  btntext="Cancel" [btnng]="true"  *ngIf="load2" />
+    <div class="header" *ngIf="!showBoard">
+      <div class="options">
+        <div class="inner-header">
+          <div class="flex justify-center items-center b">
+            <div id="img"></div>
+            <div class="flex justify-center items-end gap-5">
+                <h1 (click)="showBoard = true">Battleship</h1>
+                <p>{{userName}}</p>
+            </div>
+          </div>
+          <div  class="flex justify-center items-center flex-col gap-2 h-full">
+            <div class="btn-contain">
+              <button (click)="startQueue()" type="button">
+                <span>Crear partida</span>
               </button>
-          
-              <button (click)="joingame()"class="button">
-                <span class="liquid"></span>  
-                <span class="btn-txt">Search Game</span>
+            </div>
+            <div class="btn-contain">
+              <button (click)="joinRandomGame()" type="button">
+                <span>Buscar una partida</span>
               </button>
-              <button (click)="stadistics()"class="button">
-                <span class="liquid"></span>  
-                <span class="btn-txt">Statistics</span>
+            </div>
+            <div class="btn-contain">
+              <button (click)="openHistory()">
+                <span>Historial de juego</span>
               </button>
-          
-              <button (click)="logout()"  class="button">
-                <span class="liquid"></span>  
-                <span class="btn-txt">Logout</span>
+            </div>
+            <div class="btn-contain">
+              <button (click)="logout()">
+                <span>Cerrar sesion</span>
               </button>
+            </div>
+          </div>
         </div>
+      </div>
+      <div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g class="parallax">
+            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+            <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+          </g>
+        </svg>
+      </div>
     </div>
-</div>
+    
+    
+    
