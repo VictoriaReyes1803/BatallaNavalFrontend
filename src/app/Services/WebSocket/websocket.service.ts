@@ -51,12 +51,27 @@ export class WebSocketService {
   }
 
 
-  public attackEvent(callback: (e: any) => void) {
+  public atacar(callback: (e: any) => void) {
     this.echo?.channel('atacar').listen('.atacar', (e: any) => {
       callback(e);
     });
   }
 
+  public ataqueCorrecto(callback: (e: any) => void){
+    this.echo?.channel('ataque').listen('.ataque', (e: any) => {
+      callback(e);
+    });
+  };
 
+  public ataqueFallido(callback: (e: any) => void){
+    this.echo?.channel('ataquefallido').listen('.ataquefallido', (e: any) => {
+      callback(e);
+    });
+  };
 
+  public alertaGanador(callback: (e: any) => void){
+    this.echo?.channel('ganador').listen('.ganador', (e: any) => {
+      callback(e);
+    });
+  }
 }
