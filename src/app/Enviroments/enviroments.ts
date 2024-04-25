@@ -9,5 +9,18 @@ export const environment ={
   registerURL : `${baseURL}user/register`,
   logoutURL : `${baseURL}user/logout`,
   authenticateURL : `${baseURL}user/authenticatetoken`,
-  
+
+  queueGameURL: `${baseURL}/game/queue`,
+  joinRandomGameURL: `${baseURL}/game/join/random`,
+  endGameURL: `${baseURL}/game/end`,
+  dequeueGameURL: `${baseURL}/game/dequeue`,
+  cancelRandomQueueURL: `${baseURL}/game/cancel/random`,
+  historyGames: `${baseURL}/game/history`,
+  sendBoard: `${baseURL}/game/send/board`,
+  notify: `${baseURL}/game/notify`,
+  sseURL: `${baseURL}/game/start`,
+  attackURL: `${baseURL}/game/attack`,
+  attackSuccessURL: `${baseURL}/game/attack/success`,
+  attackFailedURL: `${baseURL}/game/attack/failed`,
+
 }
