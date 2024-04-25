@@ -25,7 +25,7 @@ export class JuegourlsService {
   }
 
   dequeueGame(): Observable<any> {
-    return this.http.post<any>(environment.dequeueGameURL, {gameId: localStorage.getItem('gameId')});
+    return this.http.post<any>(environment.dequeueGameURL, {gameId: localStorage.getItem('idPartida')});
   }
 
   cancelRandomQueue(): Observable<any> {
