@@ -21,6 +21,15 @@ export class JuegourlsService {
     });
   }
 
+  disparar(gameId: string | null, playerAttacked: string | null, playerWhoAttacked: number | null, cell:number[] ) {
+    return this.http.post(environment.attackURL, {
+      gameId: gameId,
+      playerAttacked: playerAttacked,
+      playerWhoAttacked: playerWhoAttacked,
+      cell: cell
+    });
+  }
+
   finalizarJuego(gameId: string | null, loser_id: number | null) {
     return this.http.put(environment.endGameURL, {
       gameId: gameId,
