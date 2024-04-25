@@ -21,7 +21,7 @@ export class TableroComponent {
   tabla: string[][] = [];
   tabla2: string[][] = [];
 
-  barcos = 15;
+  barcos = 2;
   juegoFinalizado = false;
   turno = localStorage.getItem('turno');
   idEnemigo :string | null = '';
@@ -55,11 +55,83 @@ export class TableroComponent {
     console.log("Rival: ", this.idEnemigo);
 
     setTimeout(() => {
-      this.ataques();
+      this.wsService.atacar((data) => {
+
+        if(data.data[2] == this.authService.getUserId()){
+          if(this.tabla[data.data[1][0]][data.data[1][1]] == 's'){
+            this.turno = data.data[2]
+            this.tabla[data.data[1][0]][data.data[1][1]] = 'h';
+            Swal.fire({
+              title: 'Ataque enemigo',
+              text: 'Ouch! Te han dado!',
+              icon: 'warning'
+            })
+            this.barcos--;
+            this.juegoUrls.ataqueExitoso(true, data.data[3], data.data[1], data.data[3]).subscribe(data => {
+            });
+            if(this.barcos == 0) {
+              this.juegoFinalizado = true;
+              this.juegoUrls.finalizarJuego(this.juego, this.authService.getUserId()).subscribe(data => {});
+              Swal.fire({
+                title: 'Fin del juego',
+                text: 'Perdiste :(',
+                icon: 'warning'
+              })
+              alert('Perdiste :c')
+              this.router.navigate(['/MenuGame']);
+            }
+          } else {
+            this.tabla[data.data[1][0]][data.data[1][1]] = 'm';
+            this.turno = data.data[2];
+            this.juegoUrls.ataqueFallido(false, data.data[2], data.data[1], data.data[3]).subscribe(data =>{
+            })
+          }
+        }
+      })
+
+      this.wsService.ataqueCorrecto((data) => {
+        if(data.data[3] == this.authService.getUserId() && data.data[0] == true){
+          this.tabla2[data.data[2][0]][data.data[2][1]] = 'h';
+          this.barcos--;
+          this.turno = this.idEnemigo;
+          Swal.fire({
+            title: 'Ataque Exitoso',
+            text: 'Le diste!',
+            icon: 'info'
+          })
+        }
+      })
+
+      this.wsService.ataqueFallido((data) => {
+        if(data.data[3] == this.authService.getUserId() && data.data[0] == false){
+          this.tabla2[data.data[2][0]][data.data[2][1]] = 'm';
+          this.turno = data.data[2];
+          Swal.fire({
+            title: 'Ataque Fallido',
+            text: 'Fallaste!',
+            icon: 'error'
+
+          })
+        }
+      })
+
+      this.wsService.alertaGanador((data) => {
+        if(data.data == this.authService.getUserId()){
+          this.juegoFinalizado = true;
+          Swal.fire({
+            title: 'Fin del juego',
+            text: 'Ganaste c:',
+            icon: 'success'
+          })
+          alert('Ganaste c:')
+          this.router.navigate(['/MenuGame']);
+        }
+      })
+      /*this.ataques();
       this.ataqueCorrecto();
       this.winner();
-      this.ataqueFallido();
-    }, 2000)
+      this.ataqueFallido();*/
+    }, 1500)
   }
 
 
@@ -110,17 +182,17 @@ export class TableroComponent {
       this.juegoUrls.finalizarJuego(this.juego, this.authService.getUserId()).subscribe(data => {
         console.log(data);
       });
-      //this.router.navigate(['/MenuGame']);
-      Swal.fire({
+      this.router.navigate(['/MenuGame']);
+      /*Swal.fire({
         title: 'Salir',
         text: 'Has salido del juego',
         icon: 'warning'
-      })
+      })*/
     }
   }
 
   atacar(i:number, j:number){
-    console.log('hvm nsajkdc,m nbalg')
+    console.log('Ataque')
     this.cargandobala = true;
     let celda = [i, j];
     this.juegoUrls.disparar(this.juego, this.idEnemigo, this.authService.getUserId(), celda).subscribe(data => {
@@ -138,11 +210,7 @@ export class TableroComponent {
           this.turno = vistima;
           this.tabla[data.data[1][0]][data.data[1][1]] = 'h';
           //alerta abajo
-          Swal.fire({
-            title: 'Daño recibido',
-            text: 'Te dieron :c',
-            icon: 'warning'
-          });
+          alert('Te dieron :c')
 
           this.barcos--;
           this.juegoUrls.ataqueExitoso(true, data.data[3], data.data[1], data.data[3]).subscribe(data => {
@@ -154,11 +222,7 @@ export class TableroComponent {
             this.juegoUrls.finalizarJuego(this.juego, this.authService.getUserId()).subscribe(data => {
               console.log(data);
             });
-            Swal.fire({
-              title: 'Fin del juego',
-              text: 'Perdiste :c',
-              icon: 'warning'
-            });
+            alert('Perdiste :c')
           }
         }else{
           this.turno = vistima;
@@ -180,11 +244,7 @@ export class TableroComponent {
         this.tabla2[data.data[2][0]][data.data[2][1]] = 'h';
         this.turno = this.idEnemigo;
         this.cargandobala = false;
-        Swal.fire({
-          title: 'Disparo',
-          text: 'Le diste c:',
-          icon: 'success'
-        });
+        alert('Le diste c:')
       }
     })
   }
@@ -198,11 +258,7 @@ export class TableroComponent {
         this.tabla2[data.data[2][0]][data.data[2][1]] = 'm';
         this.turno = turno;
         this.cargandobala = false;
-        Swal.fire({
-          title: 'Disparo',
-          text: 'Fallaste :c',
-          icon: 'error'
-        });
+        alert('Fallaste :c')
 
       }
     })
@@ -213,11 +269,7 @@ export class TableroComponent {
       if(data.data == this.authService.getUserId()){
         this.juegoFinalizado = true;
         //Poner la alerta aquí
-        Swal.fire({
-          title: 'Juego',
-          text: 'Ganaste c:',
-          icon: 'success'
-        });
+        alert('Ganaste c:')
       }
     });
   }
