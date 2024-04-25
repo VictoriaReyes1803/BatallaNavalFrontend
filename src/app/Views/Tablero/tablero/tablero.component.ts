@@ -126,7 +126,7 @@ export class TableroComponent {
           //alerta abajo
           Swal.fire({
             title: 'Daño recibido',
-            text: 'Te dieron',
+            text: 'Te dieron :c',
             icon: 'warning'
           });
 
