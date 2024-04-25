@@ -5,13 +5,15 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../../Services/Auth/auth.service";
 import {JuegourlsService} from "../../../Services/WebSocket/juegourls.service";
 import Swal from 'sweetalert2';
+import { BackgroundComponent } from '../../../Components/principal/background/background.component';
 
 @Component({
   selector: 'app-tablero',
   standalone: true,
   imports: [
     NgClass,
-    NgForOf
+    NgForOf,
+    BackgroundComponent
   ],
   templateUrl: './tablero.component.html',
   styleUrl: './tablero.component.css'

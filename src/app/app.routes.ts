@@ -41,6 +41,6 @@ export const routes: Routes = [
     {
         path: 'Tablero',
         component: TableroComponent,
-        canActivate: [AuthGuard]
+//        canActivate: [AuthGuard]
     }
 ];

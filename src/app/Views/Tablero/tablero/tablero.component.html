@@ -1,22 +1,15 @@
-<!-- Para la matriz 'enemyBoard' -->
-
-<section class="board grid h-screen soijsijo" style="grid-template-rows: 5fr 1fr;">
-  
-  <div class="boards grid grid-cols-2">
-    
-    <div class="flex flex-col items-center justify-center my-8">
-      
-      <div class="cont h-full w-10/12">
-          <!-- Boton para abandonar la partida -->
-
+<app-background/>
+<section class="board grid h-screen" style="grid-template-rows: 5fr 1fr;">
+    <div class="boards grid grid-cols-2">
+      <div class="flex flex-col items-center justify-center my-8">
+        <div class="cont h-full w-10/12">
         <div class="title flex flex-col justify-center items-center gap-2">
           <button [ngClass]="{'bg-gray-100': turno != this.authService.getUserId(), 'bg-red-500': turno == this.authService.getUserId()}" [disabled]="turno != authService.getUserId()" class="hover:bg-red-700 text-black font-bold py-2 px-4 border border-gray-300 rounded"
           (click)="salir()">Abandonar Partida</button>
           <h3 class="text-2xl text-white ont-bold mb-4">Tablero Rival</h3>
         </div>
-        
-        
-        <div class="tablero flex justify-center items-center  h-full">
+    
+  <div class="tablero flex justify-center items-center  h-full">
           <table class="table-fixed border-collapse">
             <tr *ngFor="let row of tabla2; let i = index">
               <td *ngFor="let cell of row; let j = index" class="p-0">
@@ -41,7 +34,6 @@
       </div>
     </div>
 
-    <!-- Para la matriz 'board' -->
     <div class="flex flex-col items-center justify-center my-8">
       <div class="cont h-full w-10/12">
         <div class="title flex justify-between">
