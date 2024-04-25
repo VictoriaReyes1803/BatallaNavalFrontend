@@ -72,12 +72,8 @@ export class MenuGame{
     }
   }
 
-    closeHistory(){
-        this.showHistory = false;
-    }
-
     openHistory(){
-        this.showHistory = true;
+      this.router.navigate(['/historial'])
     }
 
   startQueue() {

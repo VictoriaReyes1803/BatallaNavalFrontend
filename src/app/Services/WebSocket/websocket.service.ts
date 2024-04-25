@@ -2,7 +2,6 @@ import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import Echo from 'laravel-echo';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../Enviroments/enviroments';
-
 declare global {
   interface Window {
     Echo: Echo | undefined;
@@ -51,6 +50,8 @@ export class WebSocketService {
       callback(data);
     });
   }
+
+ 
 
 
   public atacar(callback: (e: any) => void) {

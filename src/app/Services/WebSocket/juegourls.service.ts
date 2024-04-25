@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../Enviroments/enviroments";
 import {HttpClient} from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { GameResponse } from '../../Models/Game';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +12,10 @@ export class JuegourlsService {
     private http: HttpClient
   ) { }
 
+
+  getHistory(page: number):Observable<GameResponse>{
+    return this.http.get<GameResponse>(environment.historyGames, {params: {page: page}})
+  }
 
   startQueue(): Observable<any> {
     return this.http.post<any>(environment.queueGameURL, {player1_id: 1});
