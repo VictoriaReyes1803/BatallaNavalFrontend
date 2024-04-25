@@ -15,12 +15,4 @@ export class LoginComponent {
 
   constructor(private WebSocketService: WebSocketService){}
 
-  ngOnInit(){
-    setTimeout(() => {
-      this.WebSocketService.testevent((data)=>{
-        console.log(data)
-      })
-    }, 1500);
-   
-  }
 }

@@ -4,6 +4,7 @@ import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
 import {AuthService} from "../../../Services/Auth/auth.service";
 import {JuegourlsService} from "../../../Services/WebSocket/juegourls.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tablero',
@@ -18,7 +19,6 @@ export class TableroComponent {
   tabla2: string[][] = [];
 
   barcos = 15;
-  barcosEnemigos = 15;
   juegoFinalizado = false;
   turno = localStorage.getItem('turno');
   idEnemigo :string | null = '';
@@ -36,18 +36,33 @@ export class TableroComponent {
   }
 
   ngOnInit(){
-    this.rival();
     this.llenarTabla();
     this.llenarTabla2();
     this.barcosRandom(this.tabla, this.barcos);
 
-    console.log(this.tabla)
-    console.log(this.tabla2)
+    console.log("Tabla: ", this.tabla)
+    console.log("Tabla sin barcos: ", this.tabla2)
+
+    if(this.authService.getUserId() == localStorage.getItem('p1')){
+      this.idEnemigo = localStorage.getItem('p2');
+    }else{
+      this.idEnemigo = localStorage.getItem('p1');
+    }
+
+    console.log("Rival: ", this.idEnemigo);
 
     setTimeout(() => {
       this.ataques();
+      this.ataqueCorrecto();
+      this.winner();
+      this.ataqueFallido();
     }, 2000)
   }
+
+
+
+
+
 
   llenarTabla(){
     for (let i = 0; i < 8; i++) {
@@ -104,7 +119,11 @@ export class TableroComponent {
           if(this.barcos == 0){
             this.juegoFinalizado = true;
             this.juegoUrls.finalizarJuego(this.juego, this.authService.getUserId());
-            //alerta aki
+            Swal.fire({
+              title: 'Fin del juego',
+              text: 'Perdiste :c',
+              icon: 'warning'
+            });
           }
         }else{
           this.turno = vistima;
@@ -153,13 +172,4 @@ export class TableroComponent {
       }
     });
   }
-
-  rival(){
-    if(this.authService.getUserId() == localStorage.getItem('p1')){
-      this.idEnemigo = localStorage.getItem('p2');
-    }else{
-      this.idEnemigo = localStorage.getItem('p1');
-    }
-  }
-
 }
