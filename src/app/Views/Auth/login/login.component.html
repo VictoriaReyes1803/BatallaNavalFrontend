@@ -1,45 +1,33 @@
-<<<<<<< HEAD
-<main class="w-full h-screen">
-    <div class="flex h-screen w-full justify-center items-center">
-        <div class="rounded-lg border bg-card text-card-foreground shadow-sm px-0" data-v0-t="card">
-            <div class="p-0">
-                <div class="flex flex-1 min-h-[50vh] items-center justify-center py-6">
-                    <div class="grid gap-6 w-full px-4">
-                        <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-                            <div class="flex flex-col p-6 space-y-1">
-                                <h3 class="whitespace-nowrap tracking-tight text-2xl font-bold">Login</h3>
-                                <p class="text-sm text-muted-foreground">Enter your email below to login to your account
-                                </p>
-=======
 <app-global-loader class="zindx" *ngIf="isSubmitting"></app-global-loader>
-<app-code-verify *ngIf="verifycode" [email]="email" [password]="password" (onCancel)="cancel()" ></app-code-verify>
+<app-code-verify class="zindx2"  *ngIf="verifycode" [email]="email" [password]="password" (onCancel)="cancel()" ></app-code-verify>
 <div *ngIf="mostrarAlerta" class="alertmsg">
     <app-alert [message]="message"></app-alert>
 </div>
-<div *ngIf="!verifycode" class="fondoAnimado text-gray-900 justify-center">
+<div class="fondoAnimado text-gray-900 justify-center">
 
+    <video autoplay muted loop>
+        <source src="http://localhost:4200/assets/videos/moleculasfuego.mp4" type="video/mp4">
+        Tu navegador no soporta videos HTML5.
+    </video>
 
   <div class=" primerc max-w-screen-xl m-0 sm:m-10 sm:rounded-lg flex justify-center flex-1" style="background-color: #ffffff00;">
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
+
         <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
             <section class="logo-cont flex justify-center items-center ">
-                <div class="logo h-full w-full"></div>
+                <h1 class="titulo">BATALLA NAVAL</h1>
             </section>
             <div class="mt-5 flex flex-col items-center justify-center">
                 <div class="w-full flex-1 mt-8">
                     <form class="mx-auto max-w-xs" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                        <div class="textInputWrapper">
+                        <div class="textInputWrapper ">
                             <input
                             name="email"
                             formControlName="email"
-                            placeholder="Email" type="text" class="textInput">
+                            placeholder="Correo" type="text" class="textInput">
                           <div class="alert"
                                *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">
                             <div
                               *ngIf="loginForm.controls['email'].errors?.['required']">El email es requerido.
->>>>>>> a2088cd5c3933008e1fbced5cd1bba9f176831a0
                             </div>
                             <div
                               *ngIf="loginForm.controls['email'].errors?.['email']">
@@ -52,7 +40,7 @@
                             <input
                             name="password"
                             formControlName="password"
-                            placeholder="Password" type="password" class="textInput">
+                            placeholder="Contraseña" type="password" class="textInput">
                           <div class="alert"
                                *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
                             <div
@@ -63,7 +51,7 @@
 
                         <button [disabled]="!loginForm.valid || isSubmitting"
                             type="submit"
-                            class="mt-5 tracking-wide bg-white font-semibold text-black-500 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" style="background-color: #a3e583;">
+                            class="mt-5 tracking-wide  font-semibold text-black-500 w-full py-4 rounded-full hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" style="background-color: #ffacac;">
                             <svg class="w-6 h-6 -ml-2" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -101,10 +89,10 @@
                       </div>
 
                       <p class="mt-6 text-xs text-white text-center">
-                        Don't have an account?
+                        No tienes cuenta?
                         <a
                         (click)="register()"
-                        class="hover:underline cursor-pointer text-green-500">Sign up</a>
+                        class="hover:underline cursor-pointer text-red-500">Inicia sesion</a>
                         <br>
                     
                     </p>

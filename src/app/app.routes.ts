@@ -34,16 +34,18 @@ export const routes: Routes = [
             component: TableroComponent
           }
         ]
-    }, {
+    }, 
+    {
         path: 'MenuGame',
         component: MenuGame,
         canActivate: [AuthGuard]
-    } ,
+    },
     {
         path: 'historial',
         component: HistorialComponent,
         canActivate: [AuthGuard]
-    }, {
+    }, 
+    {
         path: 'Tablero',
         component: TableroComponent,
         canActivate: [AuthGuard]

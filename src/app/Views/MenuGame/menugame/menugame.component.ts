@@ -14,6 +14,7 @@ import { JuegourlsService } from '../../../Services/WebSocket/juegourls.service'
   styleUrls: ['./menugame.component.css']
 })
 export class MenuGame{
+  private audio = new Audio();
 
   load1: Boolean = false;
   load2: Boolean = false;
@@ -31,6 +32,7 @@ export class MenuGame{
     private WebSocketService: WebSocketService,
 ) {}
 
+
   ngOnInit() {
     this.userName = this.authService.getUserName()
     setTimeout(() => {
@@ -39,6 +41,11 @@ export class MenuGame{
         this.redirectToGame(data);
       })
     }, 1500);
+    this.audio.src = 'assets/audios/fortnitemusic.mp3';
+    this.audio.load(); 
+    this.audio.loop = true; 
+    this.audio.play().catch(error => console.error("Error playing audio:", error));
+    
   }
 
   ngOnDestroy(){
@@ -49,6 +56,7 @@ export class MenuGame{
         });
       }
     this.WebSocketService.leaveChannel('startgame');
+    this.audio.pause()
   }
 
   redirectToGame(data: any) {

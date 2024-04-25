@@ -6,14 +6,10 @@
   />  
   
   <div class="fondoAnimado flex flex-col justify-center items-center w-full h-screen">
-    <div class=" primerc img"></div>
-    <div class=" primerc bg-white rounded-lg border bg-card vff">
-      <div class="flex flex-col space-y-1.5 p-6">
+    <div class=" primerc  rounded-md order bg-card vff">
+      <div class="flex justify-center pace-y-1.5 p-6">
 
-        <div class="text-black">Verify your code</div>
-        <div class="text-black">
-          Insert the 6-digit code sent to your email
-        </div>
+        <div class="text-white">Verifica tu codigo</div>
       </div>
       <div class="p-6 flex justify-center gap-4">
         <div class="flex justify-center items-center gap-x-6 ">
@@ -21,7 +17,7 @@
           <div class="flex flex-col items-center gap-2">
             <input 
             *ngIf="!success"
-            type="text" #code1 [@shake]="hasError" [ngClass]="{successInput: success}"
+            type="text" #code1 [ngClass]="{successInput: success}"
               class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
               placeholder="-" maxlength="1" [(ngModel)]="code.code1" (ngModelChange)="cambiarFoco(1)" />
     
@@ -39,7 +35,7 @@
           <div class="flex flex-col items-center gap-2">
             <input 
             *ngIf="!success"
-            type="text" #code2 [@shake]="hasError" [ngClass]="{successInput: success}"
+            type="text" #code2 [ngClass]="{successInput: success}"
               class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
               placeholder="-" maxlength="1" [(ngModel)]="code.code2" (ngModelChange)="cambiarFoco(2)" />
     
@@ -57,7 +53,7 @@
           <div class="flex flex-col items-center gap-2">
             <input 
             *ngIf="!success"
-            type="text" #code3 [@shake]="hasError" [ngClass]="{successInput: success}"
+            type="text" #code3  [ngClass]="{successInput: success}"
               class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
               placeholder="-" maxlength="1" [(ngModel)]="code.code3" (ngModelChange)="cambiarFoco(3)" />
     
@@ -75,7 +71,7 @@
           <div class="flex flex-col items-center gap-2">
             <input 
             *ngIf="!success"
-            type="text" #code4 [@shake]="hasError" [ngClass]="{successInput: success}"
+            type="text" #code4  [ngClass]="{successInput: success}"
               class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
               placeholder="-" maxlength="1" [(ngModel)]="code.code4" (ngModelChange)="cambiarFoco(4)" />
     
@@ -93,7 +89,7 @@
           <div class="flex flex-col items-center gap-2">
             <input 
             *ngIf="!success"
-            type="text" #code5 [@shake]="hasError" [ngClass]="{successInput: success}"
+            type="text" #code5  [ngClass]="{successInput: success}"
               class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
               placeholder="-" maxlength="1" [(ngModel)]="code.code5" (ngModelChange)="cambiarFoco(5)" />
     
@@ -111,7 +107,7 @@
           <div class="flex flex-col items-center gap-2">
             <input 
             *ngIf="!success"
-            type="text" #code6 [@shake]="hasError" [ngClass]="{successInput: success}"
+            type="text" #code6  [ngClass]="{successInput: success}"
               class="text-center w-14 h-14 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
               placeholder="-" maxlength="1" [(ngModel)]="code.code6" (ngModelChange)="cambiarFoco(6)" />
     
@@ -128,15 +124,15 @@
           
         </div>
       </div>
-      <div class="items-center p-6 flex justify-end">
+      <div class="items-center p-6 flex justify-center gap-5">
         
         <button 
         (click)="resendEmail()"
         [disabled]="loadingResend"
-          class=" text-white bg-slate-950 border inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors  disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-md px-3">
+          class=" text-white bg-slate-950  inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors  disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-full px-3">
           <p
           *ngIf="!loadingResend"
-          >Resend code</p>
+          >Cancelar</p>
           <app-global-loader
           *ngIf="loadingResend"
           />  
@@ -147,8 +143,8 @@
         <button 
         (click)="verifyCode()"
         [disabled]="!code.code1 || !code.code2 || !code.code3 || !code.code4 || !code.code5 || !code.code6 || disabledSumbitButton || loadingVerify"
-          class="text-white bg-slate-950 border inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors  disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-md px-3">
-          <p>Submit</p>
+          class="text-white bg-slate-950  inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors  disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-full px-3">
+          <p>Enviar</p>
          
         </button>
       </div>

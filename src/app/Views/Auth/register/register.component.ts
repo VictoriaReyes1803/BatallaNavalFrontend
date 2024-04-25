@@ -20,6 +20,8 @@ import { GlobalLoaderComponent } from '../../../Components/GlobalLoader/globallo
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+    private audio = new Audio();
+
     isSubmitting = false;
     backendErrors: any;
     constructor(
@@ -28,6 +30,17 @@ export class RegisterComponent {
 
     ){}
 
+    ngOnInit(){
+      this.audio.src = 'assets/audios/fortnitemusic.mp3';
+      this.audio.load(); 
+      this.audio.loop = true; 
+      this.audio.play().catch(error => console.error("Error playing audio:", error));
+      
+    }
+
+    ngOnDestroy(){
+      this.audio.pause()
+    }
     login(){
         this.router.navigate([''])
     }

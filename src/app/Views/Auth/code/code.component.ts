@@ -26,21 +26,6 @@ import { Router } from '@angular/router';
     AlertComponentComponent,
     GlobalLoaderComponent
   ],
-  animations:[
-    trigger('shake', [
-      transition('* => *', [ 
-        animate('1s', keyframes([
-          style({ transform: 'translateX(0)' }),
-          style({ transform: 'translateX(-5px)' }), 
-          style({ transform: 'translateX(5px)' }), 
-          style({ transform: 'translateX(-7px)' }),
-          style({ transform: 'translateX(7px)' }), 
-          style({ transform: 'translateX(-10px)' }),
-          style({ transform: 'translateX(0)' }),
-        ]))
-      ])
-    ])
-  ],
   templateUrl: './code.component.html',
   styleUrl: './code.component.css'
 })

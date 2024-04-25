@@ -11,6 +11,7 @@ input{
   
   .primerc {
     z-index: 1;
+    background-color: rgb(155, 0, 0);
   }
   
   .fondoAnimado {
@@ -22,40 +23,12 @@ input{
     flex-direction: column;
     color: text-gray-900;
     overflow: hidden;
-    background: #00445f;
+    background: #000000d3;
   }
   
-  .fondoAnimado::before {
-    z-index: 0;
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgb(255, 255, 255), #00445f);
-    animation: moverGradiente 10s infinite ease-out;
-  }
+
   
-  @keyframes moverGradiente {
-    0%, 100% {
-      transform: translateY(-50%);
-      opacity: 0;
-    }
-    50% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  .fondoo {
-    background: linear-gradient(rgba(1, 30, 76, 1), #000000);
-  
-  }
-  
-  .vff{
-    margin-bottom: 20vh;
-  }
+ 
   
   .loadr {
     z-index: 3;

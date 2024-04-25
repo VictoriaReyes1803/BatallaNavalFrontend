@@ -23,7 +23,8 @@ import { AlertComponentComponent } from '../../../Components/Alert/alert-compone
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent  {
+    private audio = new Audio();
 
     isSubmitting = false;
     backendErrors: any;
@@ -39,13 +40,24 @@ export class LoginComponent {
 
     public notfound = false;
     public error = false;
-    public passwordVerify = false;
-  
+    public passwordVerify = false;  
+    
+
     constructor(
         private router:Router,
         private userService: UserServicesService,
     ){}
 
+    ngOnInit(){
+      this.audio.src = 'assets/audios/fortnitemusic.mp3';
+      this.audio.load(); 
+      this.audio.loop = true; 
+      this.audio.play().catch(error => console.error("Error playing audio:", error));
+    }
+
+    ngOnDestroy(){
+      this.audio.pause()
+    }
     register(){
         this.router.navigate(['/register'])
     }
