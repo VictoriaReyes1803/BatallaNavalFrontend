@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-alert-component',
+  selector: 'app-alert',
   standalone: true,
-  imports: [],
+  imports: [ 
+    RouterLink
+   ],
   templateUrl: './alert-component.component.html',
-  styleUrl: './alert-component.component.css'
+  styleUrl: './alert-component.component.css',
 })
 export class AlertComponentComponent {
+  @Input() message: string = '';
+  state: string = 'in';
 
 }

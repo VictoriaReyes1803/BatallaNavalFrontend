@@ -1,0 +1,98 @@
+input{
+    font-size: 1.8rem;
+    color: black;
+  }
+  
+  .l{
+    width: 100%;
+  }
+  
+  
+  
+  .primerc {
+    z-index: 1;
+  }
+  
+  .fondoAnimado {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: text-gray-900;
+    overflow: hidden;
+    background: #00445f;
+  }
+  
+  .fondoAnimado::before {
+    z-index: 0;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgb(255, 255, 255), #00445f);
+    animation: moverGradiente 10s infinite ease-out;
+  }
+  
+  @keyframes moverGradiente {
+    0%, 100% {
+      transform: translateY(-50%);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .fondoo {
+    background: linear-gradient(rgba(1, 30, 76, 1), #000000);
+  
+  }
+  
+  .vff{
+    margin-bottom: 20vh;
+  }
+  
+  .loadr {
+    z-index: 3;
+  }
+  .img{
+    width: 10rem;
+    height: 10rem;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .alert{
+    position: absolute;
+    width: 30%;
+    bottom: 10vh;
+    right: 0;
+    z-index: 100;
+    animation: slideIn 0.5s forwards;
+  }
+  
+  .successInput{
+    border: 2px solid green;
+  }
+  
+  @keyframes slideOut {
+    from {
+        right: 0;
+    }
+    to {
+        right: -100%;
+    }
+  }
+  @keyframes slideIn {
+    from {
+        right: -100%;
+    }
+    to {
+        right: 0;
+    }
+  }

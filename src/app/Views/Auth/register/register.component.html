@@ -1,66 +1,114 @@
-<main class="w-full h-screen">
-    <div class="cont flex justify-center items-center h-full w-full">
+<app-global-loader *ngIf="isSubmitting" />
 
-        <style>
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                font-family: 'Inter', sans-serif;
-                --font-sans: 'Inter';
-            }
-        </style>
-        <style>
-            body {
-                font-family: 'Inter', sans-serif;
-                --font-sans: 'Inter';
-            }
-        </style>
-        <div class="mx-auto max-w-[400px] space-y-6">
-            <div class="space-y-2 text-center">
-                <h1 class="text-3xl font-bold">Register</h1>
-                <p class="text-gray-500 dark:text-gray-400">Create a new account to get started.</p>
-            </div>
-            <div class="space-y-4">
-                <div class="space-y-2">
-                    <label
-                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        for="name">
-                        Name
-                    </label>
-                    <input
-                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        id="name" placeholder="John Doe" required="" />
+<div class=" fondoAnimado text-gray-900 flex justify-center">
+    
+    <div class=" primerc max-w-screen-xl m-0 sm:m-10 sm:rounded-lg flex justify-center flex-1" style="background-color: #00000000;">
+
+        <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
+            
+            <section class="logo-cont flex justify-center items-center ">
+                <div class="logo h-full w-full"></div>
+            </section>
+
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            
+            <div class="mt-5 flex flex-col items-center justify-center">
+                <div class="w-full flex-1 mt-8">
+                    <form class="mx-auto max-w-xs" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <div class="textInputWrapper">
+                            <input
+                            name="name"
+                            formControlName="name"
+                            placeholder="Your Name" type="text" class="textInput">
+
+                          <div class="alert"
+                               *ngIf="registerForm.controls['name'].invalid && (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)">
+                            <div
+                              *ngIf="registerForm.controls['name'].errors?.['required']">Name is required.
+                            </div>
+                            <div
+                              *ngIf="registerForm.controls['name'].errors?.['minlength']">
+                              Name must be at least 3 characters long.
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="textInputWrapper">
+                            <input
+                            name="email"
+                            formControlName="email"
+                            placeholder="Your Email" type="text" class="textInput">
+                          <div class="alert"
+                               *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
+                            <div
+                              *ngIf="registerForm.controls['email'].errors?.['required']">Email is required.
+                            </div>
+                            <div
+                              *ngIf="registerForm.controls['email'].errors?.['email']">
+                              Incorrect format for email.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="textInputWrapper">
+                            <input
+                            name="password"
+                            formControlName="password"
+                            placeholder="Your Password" type="password" class="textInput">
+
+                          <div class="alert"
+                               *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
+                            <div
+                              *ngIf="registerForm.controls['password'].errors?.['required']">Password is required.
+                            </div>
+                            <div
+                              *ngIf="registerForm.controls['password'].errors?.['minlength']">
+                              Password must be at least 6 characters long.
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="textInputWrapper">
+                            <input
+                            name="confirmPassword"
+                            formControlName="passwordConfirm"
+                            placeholder="Confirm your Password" type="password" class="textInput"
+                            >
+                          <div class="alert"
+                               *ngIf="registerForm.controls['passwordConfirm'].invalid && (registerForm.controls['passwordConfirm'].dirty || registerForm.controls['passwordConfirm'].touched)">
+                            <div
+                              *ngIf="registerForm.controls['passwordConfirm'].errors?.['required']">Password confirmation is required.
+                            </div>
+                            <div
+                              *ngIf="registerForm.controls['passwordConfirm'].errors?.['minlength']">
+                              Password confirmation must be at least 6 characters long.
+                            </div>
+                          </div>
+                        </div>
+                        <button [disabled]="!registerForm.valid || isSubmitting"
+                                class="mt-5 tracking-wide font-semibold text-white-500 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" style="background-color: #a3e583;">
+                            <svg class="w-6 h-6 -ml-2" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="8.5" cy="7" r="4" />
+                                <path d="M20 8v6M23 11h-6" />
+                            </svg>
+                            <span class="ml- text-black">
+                                Register account
+                            </span>
+                        </button>
+                        <p class="mt-6 text-xs text-white text-center">
+                            Already have an account?
+                            <a
+                            (click)="login()"
+                            class="hover:underline cursor-pointer text-green-500">
+                            Login</a>
+                        </p>
+                      <br>
+                    </form>
                 </div>
-                <div class="space-y-2">
-                    <label
-                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        for="email">
-                        Email
-                    </label>
-                    <input
-                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        id="email" placeholder="example@email.com" required="" type="email" />
-                </div>
-                <div class="space-y-2">
-                    <label
-                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        for="password">
-                        Password
-                    </label>
-                    <input
-                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        id="password" required="" type="password" />
-                </div>
-                <button
-                    class="bg-black text-white inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
-                    type="submit">
-                    Register
-                </button>
-                <a class="w-full mt-7" [routerLink]="['/']" >iniciar sesion aqui</a>
             </div>
         </div>
     </div>
-</main>
+</div>
