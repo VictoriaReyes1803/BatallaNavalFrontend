@@ -10,6 +10,7 @@ import { DesauthGuard } from './Guards/Desauth/desauth.guard';
 import { AuthGuard } from './Guards/Auth/auth.guard';
 import { MenuGame } from './Views/MenuGame/menugame/menugame.component';
 import { TableroComponent } from './Views/Tablero/tablero/tablero.component';
+
 export const routes: Routes = [
     {
         path: '',
@@ -28,6 +29,10 @@ export const routes: Routes = [
                 path: 'code-verify',
                 component: CodeVerifyComponent
             },
+          {
+            path: 'tablero',
+            component: TableroComponent
+          }
         ]
     }, {
         path: 'MenuGame',

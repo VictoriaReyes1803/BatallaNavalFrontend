@@ -60,6 +60,14 @@ export class TableroComponent {
   }
 
 
+  ngOnDestroy(){
+    this.wsService.leaveChannel('ataque');
+    this.wsService.leaveChannel('ataquefallido');
+    this.wsService.leaveChannel('ganador');
+    this.wsService.leaveChannel('atacar');
+  }
+
+
 
 
 
@@ -96,12 +104,15 @@ export class TableroComponent {
   salir(){
     let salir = confirm('¿Estás seguro de que quieres salir?');
     if(salir == true){
-
+      this.router.navigate(['/Game']);
     }
   }
 
   atacar(i:number, j:number){
+    this.cargandobala = true;
     let celda = [i, j];
+    this.juegoUrls.disparar(this.juego, this.idEnemigo, this.authService.getUserId(), celda);
+
   }
 
   ataques(){
@@ -113,6 +124,12 @@ export class TableroComponent {
           this.turno = vistima;
           this.tabla[data.data[1][0]][data.data[1][1]] = 'h';
           //alerta abajo
+          Swal.fire({
+            title: 'Daño recibido',
+            text: 'Te dieron :c',
+            icon: 'warning'
+          });
+
           this.barcos--;
           this.juegoUrls.ataqueExitoso(true, data.data[3], data.data[1], data.data[3]);
 
@@ -129,7 +146,6 @@ export class TableroComponent {
           this.turno = vistima;
           this.tabla[data.data[1][0]][data.data[1][1]] = 'm';
           this.juegoUrls.ataqueFallido(false, data.data[3], data.data[1], data.data[3]);
-          //alerta abajo
         }
       }
     });
@@ -144,7 +160,11 @@ export class TableroComponent {
         this.tabla2[data.data[2][0]][data.data[2][1]] = 'h';
         this.turno = this.idEnemigo;
         this.cargandobala = false;
-        //Poner la alerta aquí
+        Swal.fire({
+          title: 'Disparo',
+          text: 'Le diste c:',
+          icon: 'success'
+        });
       }
     })
   }
@@ -158,7 +178,11 @@ export class TableroComponent {
         this.tabla2[data.data[2][0]][data.data[2][1]] = 'm';
         this.turno = turno;
         this.cargandobala = false;
-        //Poner la alerta aquí
+        Swal.fire({
+          title: 'Disparo',
+          text: 'Fallaste :c',
+          icon: 'error'
+        });
 
       }
     })
@@ -169,6 +193,11 @@ export class TableroComponent {
       if(data.data == this.authService.getUserId()){
         this.juegoFinalizado = true;
         //Poner la alerta aquí
+        Swal.fire({
+          title: 'Juego',
+          text: 'Ganaste c:',
+          icon: 'success'
+        });
       }
     });
   }
