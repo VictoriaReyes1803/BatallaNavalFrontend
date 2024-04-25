@@ -56,7 +56,6 @@ export class TableroComponent {
 
     setTimeout(() => {
       this.wsService.atacar((data) => {
-
         if(data.data[2] == this.authService.getUserId()){
           if(this.tabla[data.data[1][0]][data.data[1][1]] == 's'){
             this.turno = data.data[2]
@@ -201,76 +200,4 @@ export class TableroComponent {
 
   }
 
-  ataques(){
-    this.wsService.atacar((data) => {
-      const vistima = data.data[2];
-
-      if(vistima == this.authService.getUserId()){
-        if(this.tabla[data.data[1][0]][data.data[1][1]] == 's'){
-          this.turno = vistima;
-          this.tabla[data.data[1][0]][data.data[1][1]] = 'h';
-          //alerta abajo
-          alert('Te dieron :c')
-
-          this.barcos--;
-          this.juegoUrls.ataqueExitoso(true, data.data[3], data.data[1], data.data[3]).subscribe(data => {
-            console.log(data);
-          });
-
-          if(this.barcos == 0){
-            this.juegoFinalizado = true;
-            this.juegoUrls.finalizarJuego(this.juego, this.authService.getUserId()).subscribe(data => {
-              console.log(data);
-            });
-            alert('Perdiste :c')
-          }
-        }else{
-          this.turno = vistima;
-          this.tabla[data.data[1][0]][data.data[1][1]] = 'm';
-          this.juegoUrls.ataqueFallido(false, data.data[3], data.data[1], data.data[3]).subscribe(data =>{
-            console.log(data)
-          });
-        }
-      }
-    });
-  }
-
-  ataqueCorrecto(){
-    this.wsService.ataqueCorrecto((data) => {
-      const idEnemigo = data.data[3];
-      const statusAtaque = data.data[0];
-
-      if(idEnemigo == this.authService.getUserId() && statusAtaque == true){
-        this.tabla2[data.data[2][0]][data.data[2][1]] = 'h';
-        this.turno = this.idEnemigo;
-        this.cargandobala = false;
-        alert('Le diste c:')
-      }
-    })
-  }
-
-  ataqueFallido(){
-    this.wsService.ataqueFallido((data) => {
-      const idEnemigo = data.data[3];
-      const statusAtaque = data.data[0];
-      const turno = data.data[1];
-      if(idEnemigo == this.authService.getUserId() && statusAtaque == false){
-        this.tabla2[data.data[2][0]][data.data[2][1]] = 'm';
-        this.turno = turno;
-        this.cargandobala = false;
-        alert('Fallaste :c')
-
-      }
-    })
-  }
-
-  winner(){
-    this.wsService.alertaGanador((data) => {
-      if(data.data == this.authService.getUserId()){
-        this.juegoFinalizado = true;
-        //Poner la alerta aquí
-        alert('Ganaste c:')
-      }
-    });
-  }
 }
