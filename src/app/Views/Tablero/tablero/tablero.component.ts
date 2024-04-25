@@ -9,7 +9,10 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-tablero',
   standalone: true,
-  imports: [],
+  imports: [
+    NgClass,
+    NgForOf
+  ],
   templateUrl: './tablero.component.html',
   styleUrl: './tablero.component.css'
 })
@@ -28,7 +31,7 @@ export class TableroComponent {
 
   constructor(
     private wsService: WebSocketService,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
     private juegoUrls: JuegourlsService
   ){
@@ -103,15 +106,26 @@ export class TableroComponent {
 
   salir(){
     let salir = confirm('¿Estás seguro de que quieres salir?');
-    if(salir == true){
-      this.router.navigate(['/Game']);
+    if(salir){
+      this.juegoUrls.finalizarJuego(this.juego, this.authService.getUserId()).subscribe(data => {
+        console.log(data);
+      });
+      //this.router.navigate(['/MenuGame']);
+      Swal.fire({
+        title: 'Salir',
+        text: 'Has salido del juego',
+        icon: 'warning'
+      })
     }
   }
 
   atacar(i:number, j:number){
+    console.log('hvm nsajkdc,m nbalg')
     this.cargandobala = true;
     let celda = [i, j];
-    this.juegoUrls.disparar(this.juego, this.idEnemigo, this.authService.getUserId(), celda);
+    this.juegoUrls.disparar(this.juego, this.idEnemigo, this.authService.getUserId(), celda).subscribe(data => {
+      console.log(data);
+    });
 
   }
 
@@ -131,11 +145,15 @@ export class TableroComponent {
           });
 
           this.barcos--;
-          this.juegoUrls.ataqueExitoso(true, data.data[3], data.data[1], data.data[3]);
+          this.juegoUrls.ataqueExitoso(true, data.data[3], data.data[1], data.data[3]).subscribe(data => {
+            console.log(data);
+          });
 
           if(this.barcos == 0){
             this.juegoFinalizado = true;
-            this.juegoUrls.finalizarJuego(this.juego, this.authService.getUserId());
+            this.juegoUrls.finalizarJuego(this.juego, this.authService.getUserId()).subscribe(data => {
+              console.log(data);
+            });
             Swal.fire({
               title: 'Fin del juego',
               text: 'Perdiste :c',
@@ -145,7 +163,9 @@ export class TableroComponent {
         }else{
           this.turno = vistima;
           this.tabla[data.data[1][0]][data.data[1][1]] = 'm';
-          this.juegoUrls.ataqueFallido(false, data.data[3], data.data[1], data.data[3]);
+          this.juegoUrls.ataqueFallido(false, data.data[3], data.data[1], data.data[3]).subscribe(data =>{
+            console.log(data)
+          });
         }
       }
     });
