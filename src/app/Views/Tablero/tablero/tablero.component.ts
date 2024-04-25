@@ -64,6 +64,7 @@ export class TableroComponent {
     this.wsService.leaveChannel('ataque');
     this.wsService.leaveChannel('ataquefallido');
     this.wsService.leaveChannel('ganador');
+    this.wsService.leaveChannel('atacar');
   }
 
 
