@@ -61,7 +61,6 @@ export class TableroComponent {
 
 
   ngOnDestroy(){
-    this.wsService.leaveChannel('atacar');
     this.wsService.leaveChannel('ataque');
     this.wsService.leaveChannel('ataquefallido');
     this.wsService.leaveChannel('ganador');
