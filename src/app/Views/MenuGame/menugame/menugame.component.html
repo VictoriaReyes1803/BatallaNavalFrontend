@@ -1,6 +1,6 @@
 
-    <app-global-loader text="Buscando un jugador..." [textng]="true"  btntext="Cancel" [btnng]="true"  *ngIf="load1" />
-    <app-global-loader text="Buscando un juego..." [textng]="true"  btntext="Cancel" [btnng]="true"  *ngIf="load2" />
+    <app-global-loader text="Buscando un jugador..." [textng]="true"  btntext="Cancel" [btnng]="true" (close)="cerrar1()" *ngIf="load1" />
+    <app-global-loader text="Buscando un juego..." [textng]="true"  btntext="Cancel" [btnng]="true" (close)="cerrar2()" *ngIf="load2" />
     <div class="header" *ngIf="!showBoard">
       <div class="options">
         <div class="inner-header">

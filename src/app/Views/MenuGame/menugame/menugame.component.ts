@@ -45,22 +45,22 @@ export class MenuGame{
       if (this.load1 === true){
         this.JuegourlsService.dequeueGame().subscribe(data => {
           console.log('Dequeued game:', data);
-          localStorage.removeItem('gameId');
+          localStorage.removeItem('idPartida');
         });
       }
-    this.WebSocketService.leaveChannel('lol');
+    this.WebSocketService.leaveChannel('startgame');
   }
 
   redirectToGame(data: any) {
     if ( data.data.players[0] == this.authService.getUserId() || data.data.players[1] == this.authService.getUserId()
     ) {
-      localStorage.setItem('gameId', data.data.gameId);
-      localStorage.setItem('player1', data.data.players[0]);
-      localStorage.setItem('player2', data.data.players[1]);
-      localStorage.setItem('turn', data.data.players[1]);
+      localStorage.setItem('p1', data.data.players[0]);
+      localStorage.setItem('p2', data.data.players[1]);
+      localStorage.setItem('turno', data.data.players[1]);
+      localStorage.setItem('idPartida', data.data.gameId);
       this.load1 = false;
       this.load2 = false;
-      this.showBoard = true;
+      this.router.navigate(['/Tablero'])
     }
   }
 
@@ -76,7 +76,7 @@ export class MenuGame{
     this.load1 = true;
     this.JuegourlsService.startQueue().subscribe(
       data => {
-        localStorage.setItem('gameId', data.gameId);
+        localStorage.setItem('idPartida', data.gameId);
       },
       err =>{
         if (err.status == 400){
@@ -100,7 +100,7 @@ export class MenuGame{
     this.JuegourlsService.joinRandomGame().subscribe(
       data => {
         console.log('Joined game:', data);
-        localStorage.setItem('gameId', data.gameId);
+        localStorage.setItem('idPartida', data.gameId);
         if (!data.game_found) {
           setTimeout(() => {
             this.tryJoinRandomGame();
@@ -128,17 +128,17 @@ export class MenuGame{
     })
   }
 
-  @HostListener('window:keydown', ['$event'])
-  handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Escape' && this.load1) {
-      this.load1 = false;
-      this.JuegourlsService.dequeueGame().subscribe(data => {
-        console.log('Dequeued game:', data);
-        localStorage.removeItem('gameId');
-      });
-    }else if (event.key === 'Escape' && this.load2) {
-      this.load2 = false;
-      this.joiningGame = false;
-    }
+  cerrar1(){
+    this.load1 = false;
+    this.JuegourlsService.dequeueGame().subscribe(data => {
+      console.log('Dequeued game:', data);
+      localStorage.removeItem('idPartida');
+    });
   }
+
+  cerrar2(){
+    this.load2 = false;
+    this.joiningGame = false;
+  }
+
 }

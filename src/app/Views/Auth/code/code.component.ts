@@ -130,7 +130,7 @@ export class CodeVerifyComponent {
 
         setTimeout(() => {
           this.AuthService.saveTokenResponse(res.jwt, res.data)
-          this.router.navigate(['/dashboard'])
+          this.router.navigate(['MenuGame'])
         }, 50);
       
       },

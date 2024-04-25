@@ -9,7 +9,7 @@ import { HistorialComponent } from './Views/principal/historial/historial.compon
 import { DesauthGuard } from './Guards/Desauth/desauth.guard';
 import { AuthGuard } from './Guards/Auth/auth.guard';
 import { MenuGame } from './Views/MenuGame/menugame/menugame.component';
-
+import { TableroComponent } from './Views/Tablero/tablero/tablero.component';
 export const routes: Routes = [
     {
         path: '',
@@ -29,23 +29,18 @@ export const routes: Routes = [
                 component: CodeVerifyComponent
             },
         ]
-    },
+    }, {
+        path: 'MenuGame',
+        component: MenuGame,
+        canActivate: [AuthGuard]
+    } ,
     {
-        path: 'home',
-        component: MenuComponent,
-        canActivate: [AuthGuard],
-        children: [
-            {
-                path: '',
-                component: HomeComponent
-            },
-            {
-                path: 'historial',
-                component: HistorialComponent
-            }, {
-                path: 'Game',
-                component: MenuGame
-            }
-        ]
+        path: 'historial',
+        component: HistorialComponent,
+        canActivate: [AuthGuard]
+    }, {
+        path: 'Tablero',
+        component: TableroComponent,
+        canActivate: [AuthGuard]
     }
 ];

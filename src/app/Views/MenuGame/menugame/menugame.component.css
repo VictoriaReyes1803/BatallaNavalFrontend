@@ -1,7 +1,6 @@
 @import url(//fonts.googleapis.com/css?family=Lato:300:400);
 
 #img{
-    background-image: url('../../../resources/images/logo.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
