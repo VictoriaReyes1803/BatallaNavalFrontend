@@ -28,11 +28,7 @@ export const routes: Routes = [
             {
                 path: 'code-verify',
                 component: CodeVerifyComponent
-            },
-          {
-            path: 'tablero',
-            component: TableroComponent
-          }
+            }
         ]
     }, 
     {

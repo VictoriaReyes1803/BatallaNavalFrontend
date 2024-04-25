@@ -1,25 +1,29 @@
 <div class="loader-container">
     <div class="container">
-        <div class="flex-col gap-4 w-full flex items-center justify-center">
-            <div class="fire">
-                <div class="fire-left">
-                  <div class="main-fire"></div>
-                  <div class="particle-fire"></div>
-                </div>
-                <div class="fire-center">
-                  <div class="main-fire"></div>
-                  <div class="particle-fire"></div>
-                </div>
-                <div class="fire-right">
-                  <div class="main-fire"></div>
-                  <div class="particle-fire"></div>
-                </div>
-                <div class="fire-bottom">
-                  <div class="main-fire"></div>
-                </div>
-              </div>
-            <h1 *ngIf="textng" class="text-white">{{ text }}</h1>
-            <Button class="btn" *ngIf="btnng" (click)="btn()" [disabled]="disabled" >{{ btntext }}</Button>
+        <div class="flex-col gap-4 w-full flex gap-5 items-center justify-center">
+                <div class="fire">
+                    <div class="fire-left">
+                      <div class="main-fire"></div>
+                      <div class="particle-fire"></div>
+                    </div>
+                    <div class="fire-center">
+                      <div class="main-fire"></div>
+                      <div class="particle-fire"></div>
+                    </div>
+                    <div class="fire-right">
+                      <div class="main-fire"></div>
+                      <div class="particle-fire"></div>
+                    </div>
+                    <div class="fire-bottom">
+                      <div class="main-fire"></div>
+                    </div>
+                  </div>
+            
+                  <div class="flex items-center justify-center flex-col aaoao">
+                    <h1 *ngIf="textng" class="text-white">{{ text }}</h1>
+                    <Button class="btn" *ngIf="btnng" (click)="btn()" [disabled]="disabled" >{{ btntext }}</Button>
+                  </div>
+         
           </div>
       </div>
   </div>

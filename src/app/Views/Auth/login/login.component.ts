@@ -24,7 +24,6 @@ import { AlertComponentComponent } from '../../../Components/Alert/alert-compone
   styleUrl: './login.component.css'
 })
 export class LoginComponent  {
-    private audio = new Audio();
 
     isSubmitting = false;
     backendErrors: any;
@@ -46,18 +45,10 @@ export class LoginComponent  {
     constructor(
         private router:Router,
         private userService: UserServicesService,
+        
     ){}
 
-    ngOnInit(){
-      this.audio.src = 'assets/audios/fortnitemusic.mp3';
-      this.audio.load(); 
-      this.audio.loop = true; 
-      this.audio.play().catch(error => console.error("Error playing audio:", error));
-    }
 
-    ngOnDestroy(){
-      this.audio.pause()
-    }
     register(){
         this.router.navigate(['/register'])
     }
