@@ -22,6 +22,7 @@ export class TableroComponent {
 
   tabla: string[][] = [];
   tabla2: string[][] = [];
+  private audio = new Audio();
 
   barcos = 2;
   juegoFinalizado = false;
@@ -41,6 +42,11 @@ export class TableroComponent {
   }
 
   ngOnInit(){
+    this.audio.src = 'assets/audios/cancionjuego.mp3';
+    this.audio.load(); 
+    this.audio.loop = true; 
+    this.audio.play().catch(error => console.error("Error playing audio:", error));    
+
     this.llenarTabla();
     this.llenarTabla2();
     this.barcosRandom(this.tabla, this.barcos);
@@ -126,6 +132,8 @@ export class TableroComponent {
           })
           alert('Ganaste c:')
           this.router.navigate(['/MenuGame']);
+          this.audio.pause()
+
         }
       })
       /*this.ataques();
@@ -141,6 +149,8 @@ export class TableroComponent {
     this.wsService.leaveChannel('ataquefallido');
     this.wsService.leaveChannel('ganador');
     this.wsService.leaveChannel('atacar');
+    this.audio.pause()
+
   }
 
 
